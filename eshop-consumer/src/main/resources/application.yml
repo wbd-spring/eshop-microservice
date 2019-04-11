@@ -1,19 +1,15 @@
 server:
-  port: 8081
+  port: 8083
 spring:
   application:
-    name: eureka-client
+    name: eureka-consumer
     
 eureka:
   instance:
-    hostname: service
+    hostname: consumer
   client:
     register-with-eureka: true
     service-url:
       defaultZone: http://localhost:8080/eureka
-    
-    
-    
-    
- 
   
+    
