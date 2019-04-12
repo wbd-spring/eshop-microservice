@@ -5,8 +5,7 @@ spring:
     name: eureka-client
     
 eureka:
-  instance:
-    hostname: service
+
   client:
     register-with-eureka: true
     service-url:

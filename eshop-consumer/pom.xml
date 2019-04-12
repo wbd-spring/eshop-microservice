@@ -1,63 +1,62 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.wbd</groupId>
-  <artifactId>eshop-consumer</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-   <parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.wbd</groupId>
+	<artifactId>eshop-consumer</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.15.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>1.4.3.RELEASE</version>
+		<relativePath /> <!-- 1.5.15.RELEASE Edgware.SR4 lookup parent from repository -->
 	</parent>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<spring-cloud.version>Camden.SR5</spring-cloud.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-hystrix</artifactId>
+		</dependency>
+
+		<!-- 引入feign 依赖 ，用来实现声明式rest调用 -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-feign</artifactId>
+		</dependency>
+
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
-		
-		 <!-- 引入eureka client依赖 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
-        </dependency>
-     
-        <!-- 引入feign 依赖 ，用来实现声明式rest调用,实现lbs负载均衡-->
-    <dependency>
-    <groupId>org.springframework.cloud</groupId>
-    <artifactId>spring-cloud-starter-feign</artifactId>
-    </dependency>
-    
-   
-    
 	</dependencies>
 
-<!-- 使用dependencyManagement进行spring cloud 版本管理 -->
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Camden.SR6</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
-    </dependencyManagement>
 	<build>
 		<plugins>
 			<plugin>
@@ -66,4 +65,6 @@
 			</plugin>
 		</plugins>
 	</build>
+
+
 </project>

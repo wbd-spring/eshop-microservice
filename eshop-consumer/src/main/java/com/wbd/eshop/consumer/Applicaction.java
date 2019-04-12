@@ -12,7 +12,7 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
  */
 @SpringBootApplication
 @EnableEurekaClient
-@EnableFeignClients  //开启客户端访问服务的负载均衡功能
+@EnableFeignClients(basePackages = { "com.wbd.eshop.consumer.service" })  //开启客户端访问服务的负载均衡功能
 public class Applicaction {
 	
 	public static void main(String[] args) {

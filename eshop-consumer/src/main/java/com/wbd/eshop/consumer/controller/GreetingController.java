@@ -18,4 +18,9 @@ public class GreetingController {
 	public String testGreeting(String name) {
 		return ss.sayHello(name);
 	}
+	
+	@RequestMapping("/greeting2")
+	public String testGreeting2(String name) {
+		return "hello world========="+name;
+	}
 }
