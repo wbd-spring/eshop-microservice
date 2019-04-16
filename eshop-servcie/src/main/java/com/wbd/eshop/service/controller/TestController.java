@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
 @RestController
 public class TestController {
 
@@ -13,8 +15,15 @@ public class TestController {
 	
 	
 	@RequestMapping("/say")
+	@HystrixCommand(fallbackMethod = "sayHelloFallback")
 	public String sayHello(String name) {
 		
 		return "name=="+name+"\t"+"port=="+port;
+	}
+	
+	
+	public String sayHelloFallback(String name) {
+		return "HystrixCommand...error"+name;
+		
 	}
 }
