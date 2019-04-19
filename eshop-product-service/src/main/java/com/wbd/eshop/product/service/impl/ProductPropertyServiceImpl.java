@@ -21,7 +21,7 @@ public class ProductPropertyServiceImpl implements ProductPropertyService {
 
 		productPropertyMapper.add(productProperty);
 		
-		mq.send(RabbitQueue.DATA_CHANGE_QUEUE, "{\"event_type\":\"add\",\"data_type\":\"product-property\",\"id\":"+productProperty.getId()+"}");
+		mq.send(RabbitQueue.DATA_CHANGE_QUEUE, "{\"event_type\":\"add\",\"data_type\":\"product-property\",\"id\":"+productProperty.getId()+", \"product_id\": "+productProperty.getProductId()+"}");
 
 	}
 
@@ -29,7 +29,7 @@ public class ProductPropertyServiceImpl implements ProductPropertyService {
 
 		productPropertyMapper.update(productProperty);
 		
-		mq.send(RabbitQueue.DATA_CHANGE_QUEUE, "{\"event_type\":\"update\",\"data_type\":\"product-property\",\"id\":"+productProperty.getId()+"}");
+		mq.send(RabbitQueue.DATA_CHANGE_QUEUE, "{\"event_type\":\"update\",\"data_type\":\"product-property\",\"id\":"+productProperty.getId()+", \"product_id\": "+productProperty.getProductId()+"}");
 
 	}
 
@@ -37,7 +37,7 @@ public class ProductPropertyServiceImpl implements ProductPropertyService {
 
 		productPropertyMapper.deleteProductPropertyById(id);
 		
-		mq.send(RabbitQueue.DATA_CHANGE_QUEUE, "{\"event_type\":\"delete\",\"data_type\":\"product-property\",\"id\":"+id+"}");
+		mq.send(RabbitQueue.DATA_CHANGE_QUEUE, "{\"event_type\":\"delete\",\"data_type\":\"product-property\",\"id\":"+id+", \"product_id\": "+getProductPropertyById(id).getProductId()+"}");
 
 	}
 

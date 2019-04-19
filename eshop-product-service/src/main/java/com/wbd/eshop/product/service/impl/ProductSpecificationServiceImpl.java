@@ -21,7 +21,7 @@ public class ProductSpecificationServiceImpl implements ProductSpecificationServ
 	public void addProductSpecification(ProductSpecification productSpecification) {
 
 		productSpecificationMapper.add(productSpecification);
-		mq.send(RabbitQueue.DATA_CHANGE_QUEUE, "{\"event_type\":\"add\",\"data_type\":\"product-specification\",\"id\":"+productSpecification.getId()+"}");
+		mq.send(RabbitQueue.DATA_CHANGE_QUEUE, "{\"event_type\":\"add\",\"data_type\":\"product-specification\",\"id\":"+productSpecification.getId()+", \"product_id\": "+productSpecification.getProductId()+"}");
 
 	}
 
@@ -29,7 +29,7 @@ public class ProductSpecificationServiceImpl implements ProductSpecificationServ
 
 		productSpecificationMapper.update(productSpecification);
 		
-		mq.send(RabbitQueue.DATA_CHANGE_QUEUE, "{\"event_type\":\"update\",\"data_type\":\"product-specification\",\"id\":"+productSpecification.getId()+"}");
+		mq.send(RabbitQueue.DATA_CHANGE_QUEUE, "{\"event_type\":\"update\",\"data_type\":\"product-specification\",\"id\":"+productSpecification.getId()+", \"product_id\": "+productSpecification.getProductId()+"}");
 
 	}
 
@@ -37,7 +37,7 @@ public class ProductSpecificationServiceImpl implements ProductSpecificationServ
 
 		productSpecificationMapper.deleteProductSpecificationById(id);
 		
-		mq.send(RabbitQueue.DATA_CHANGE_QUEUE, "{\"event_type\":\"delete\",\"data_type\":\"product-specification\",\"id\":"+id+"}");
+		mq.send(RabbitQueue.DATA_CHANGE_QUEUE, "{\"event_type\":\"delete\",\"data_type\":\"product-specification\",\"id\":"+id+", \"product_id\": "+getProductSpecificationById(id).getProductId()+"}");
 
 	}
 

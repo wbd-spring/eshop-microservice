@@ -20,14 +20,14 @@ public class ProductIntroServiceImpl implements ProductIntroService {
 	
 	public void addProductIntro(ProductIntro productIntro) {
 		productIntroMapper.add(productIntro);
-		mq.send(RabbitQueue.DATA_CHANGE_QUEUE, "{\"event_type\":\"add\",\"data_type\":\"product-intro\",\"id\":"+productIntro.getId()+"}");
+		mq.send(RabbitQueue.DATA_CHANGE_QUEUE, "{\"event_type\":\"add\",\"data_type\":\"product-intro\",\"id\":"+productIntro.getId()+", \"product_id\": "+productIntro.getProductId()+"}");
 
 	}
 
 	public void updateProductIntro(ProductIntro productIntro) {
 
 		productIntroMapper.update(productIntro);
-		mq.send(RabbitQueue.DATA_CHANGE_QUEUE, "{\"event_type\":\"update\",\"data_type\":\"product-intro\",\"id\":"+productIntro.getId()+"}");
+		mq.send(RabbitQueue.DATA_CHANGE_QUEUE, "{\"event_type\":\"update\",\"data_type\":\"product-intro\",\"id\":"+productIntro.getId()+", \"product_id\": "+productIntro.getProductId()+"}");
 
 	}
 
@@ -35,7 +35,7 @@ public class ProductIntroServiceImpl implements ProductIntroService {
 
 		productIntroMapper.deleteProductIntroById(id);
 		
-		mq.send(RabbitQueue.DATA_CHANGE_QUEUE, "{\"event_type\":\"delete\",\"data_type\":\"product-intro\",\"id\":"+id+"}");
+		mq.send(RabbitQueue.DATA_CHANGE_QUEUE, "{\"event_type\":\"delete\",\"data_type\":\"product-intro\",\"id\":"+id+", \"product_id\": "+getProductIntroById(id).getProductId()+"}");
 
 	}
 
