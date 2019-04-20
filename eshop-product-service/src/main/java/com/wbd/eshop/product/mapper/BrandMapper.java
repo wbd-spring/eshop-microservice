@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
 
 import com.wbd.eshop.product.model.Brand;
@@ -17,6 +18,7 @@ import com.wbd.eshop.product.model.Brand;
 public interface BrandMapper {
 
 	@Insert("insert into tb_brand(name,description) values(#{name},#{description})")
+	@SelectKey(statement="select LAST_INSERT_ID()", keyProperty="id", before=false, resultType=int.class)
 	public void add(Brand brand);
 	
 	@Update("update tb_brand set name=#{name},description=#{description} where id=#{id}")
