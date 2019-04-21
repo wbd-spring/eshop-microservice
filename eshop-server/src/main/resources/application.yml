@@ -1,12 +1,12 @@
 server:
-  port: 8080
+  port: 8070
 spring:
   application:
     name: eureka-server
     
 eureka:
   instance:
-    hostname: localhost
+    hostname: 192.168.1.5
   client:
     register-with-eureka: false
     service-url:
