@@ -71,7 +71,7 @@ public class DataChangeQueueReceiver {
 		String eventType = jsonObject.getString("event_type");
 		Jedis jedis = jedisPool.getResource();
 		if (eventType.equals("add") || eventType.equals("update")) {
-			jedis.set("brand_" + id, ps.findBrandById(id));
+			jedis.set("brand_" + id, JSONObject.parseObject(ps.findBrandById(id)).toJSONString());
 		} else if (eventType.equals("delete")) {
 			jedis.del("brand_" + id);
 		}
@@ -85,7 +85,7 @@ public class DataChangeQueueReceiver {
 		String eventType = jsonObject.getString("event_type");
 		Jedis jedis = jedisPool.getResource();
 		if (eventType.equals("add") || eventType.equals("update")) {
-			jedis.set("category_" + id, ps.findCategoryById(id));
+			jedis.set("category_" + id, JSONObject.parseObject( ps.findCategoryById(id)).toJSONString());
 		} else if (eventType.equals("delete")) {
 			jedis.del("category_" + id);
 		}
@@ -100,7 +100,7 @@ public class DataChangeQueueReceiver {
 		String eventType = jsonObject.getString("event_type");
 		Jedis jedis = jedisPool.getResource();
 		if (eventType.equals("add") || eventType.equals("update")) {
-			jedis.set("product_" + id, ps.findProductById(id));
+			jedis.set("product_" + id, JSONObject.parseObject( ps.findProductById(id)).toJSONString() );
 		} else if (eventType.equals("delete")) {
 			jedis.del("product_" + id);
 		}
@@ -120,7 +120,7 @@ public class DataChangeQueueReceiver {
 			jedis.del("product_intro_" + id);
 		}
 
-		sender.send("aggr-data-change-queue", "{\"dim_type\":\"product\",\"id\":" + id + "}");
+		sender.send("aggr-data-change-queue", "{\"dim_type\":\"product_intro\",\"id\":" + id + "}");
 
 	}
 

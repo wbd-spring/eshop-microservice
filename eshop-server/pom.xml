@@ -3,7 +3,7 @@
   <groupId>com.wbd</groupId>
   <artifactId>eshop-server</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  
+  <name>eshop-server</name>
   <parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
